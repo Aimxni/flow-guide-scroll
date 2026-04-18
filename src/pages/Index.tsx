@@ -122,7 +122,7 @@ const Index = () => {
       </div>
 
       {/* ─── WHY INTERNHUB (pinned) ─── */}
-      <ScrollReveal pinned id-="why" className="border-t border-white/[0.07]">
+      <ScrollReveal pinned className="border-t border-white/[0.07]">
         <div id="why" className="mx-auto max-w-[1200px] px-6 md:px-10">
           <div className="mb-16 text-center">
             <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground/40">
