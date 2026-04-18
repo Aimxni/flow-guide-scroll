@@ -7,6 +7,8 @@ interface ScrollRevealProps {
   pinned?: boolean;
   /** Distance the content slides from (px) */
   offset?: number;
+  /** Outer wrapper height when pinned. Higher = longer scroll moment. */
+  pinnedHeight?: string;
   className?: string;
 }
 
@@ -21,6 +23,7 @@ export const ScrollReveal = ({
   children,
   pinned = false,
   offset = 60,
+  pinnedHeight = "115vh",
   className = "",
 }: ScrollRevealProps) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -39,8 +42,8 @@ export const ScrollReveal = ({
 
   if (pinned) {
     return (
-      <section ref={ref} className={`relative ${className}`} style={{ minHeight: "150vh" }}>
-        <div className="sticky top-0 flex min-h-screen items-center justify-center">
+      <section ref={ref} className={`relative ${className}`} style={{ minHeight: pinnedHeight }}>
+        <div className="sticky top-0 flex min-h-screen items-center justify-center py-16">
           <motion.div style={{ opacity, y, scale }} className="w-full">
             {children}
           </motion.div>
@@ -48,6 +51,7 @@ export const ScrollReveal = ({
       </section>
     );
   }
+
 
   return (
     <motion.section
