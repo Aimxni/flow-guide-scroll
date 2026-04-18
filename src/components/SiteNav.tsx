@@ -6,6 +6,8 @@ import { Briefcase } from "lucide-react";
 const navContainerVariants = {
   expanded: {
     width: "auto",
+    y: 0,
+    opacity: 1,
     transition: {
       type: "spring" as const,
       damping: 20,
@@ -16,6 +18,8 @@ const navContainerVariants = {
   },
   collapsed: {
     width: "3rem",
+    y: 0,
+    opacity: 1,
     transition: {
       type: "spring" as const,
       damping: 20,
