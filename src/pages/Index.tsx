@@ -71,7 +71,7 @@ const Index = () => {
           animate="show"
           variants={fadeUp}
           custom={2}
-          className="mb-10 max-w-[480px] text-[17px] leading-relaxed text-foreground/60"
+          className="mb-8 max-w-[480px] text-[17px] leading-relaxed text-foreground/60"
         >
           Connect with top companies, gain real-world experience, and
           kickstart your career — built for Bangladeshi students.
@@ -98,7 +98,7 @@ const Index = () => {
           animate="show"
           variants={fadeUp}
           custom={4}
-          className="mt-10 text-xs tracking-wide text-foreground/40"
+          className="mt-8 text-xs tracking-wide text-foreground/40"
         >
           Trusted by students from BUET · DU · NSU · BRAC · IUT &amp; more
         </motion.p>
