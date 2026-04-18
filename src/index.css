@@ -109,21 +109,26 @@
     animation: gradient-shimmer 7s ease-in-out infinite;
   }
 
-  /* Cluely-style soft glass card.
-     - Outer ring (subtle dark) + inset highlight at the top for the "lit from above" feel
-     - Layered colored shadow that picks up the card tint
-     - Apply on top of any bg-lav-* utility */
+  /* Cluely-style glass card — bolder, more prominent rim + deeper shadow.
+     Apply on top of any bg-lav-* utility. */
   .project-card {
     @apply relative rounded-[28px];
     box-shadow:
-      inset 0 1px 0 0 hsl(0 0% 100% / 0.55),
-      inset 0 0 0 1px hsl(0 0% 100% / 0.18),
-      0 1px 0 0 hsl(220 100% 8% / 0.08),
-      0 24px 48px -20px hsl(220 80% 30% / 0.45),
-      0 8px 24px -12px hsl(220 60% 20% / 0.35);
+      /* Bright top edge highlight */
+      inset 0 1.5px 0 0 hsl(0 0% 100% / 0.85),
+      /* Crisp inner ring */
+      inset 0 0 0 1.5px hsl(0 0% 100% / 0.35),
+      /* Subtle dark inner outline for definition */
+      inset 0 0 0 2.5px hsl(220 80% 15% / 0.08),
+      /* Outer hairline */
+      0 0 0 1px hsl(220 100% 8% / 0.12),
+      /* Deep colored drop shadow */
+      0 32px 64px -24px hsl(220 80% 25% / 0.6),
+      0 12px 32px -12px hsl(220 70% 15% / 0.45),
+      0 4px 12px -4px hsl(220 100% 5% / 0.3);
   }
 
-  /* Top sheen overlay — adds the bright gradient highlight you see on Cluely cards */
+  /* Top sheen overlay — stronger bright gradient highlight at the top of each card */
   .project-card::before {
     content: "";
     position: absolute;
@@ -132,9 +137,9 @@
     pointer-events: none;
     background: linear-gradient(
       180deg,
-      hsl(0 0% 100% / 0.35) 0%,
-      hsl(0 0% 100% / 0.05) 22%,
-      transparent 55%
+      hsl(0 0% 100% / 0.55) 0%,
+      hsl(0 0% 100% / 0.12) 18%,
+      transparent 50%
     );
     mix-blend-mode: overlay;
   }
@@ -200,9 +205,9 @@
   80% { transform: translate(-4%, 5%) scale(0.97); }
 }
 
-.aurora-1 { animation: aurora-drift-1 22s ease-in-out infinite; }
-.aurora-2 { animation: aurora-drift-2 28s ease-in-out infinite; }
-.aurora-3 { animation: aurora-drift-3 25s ease-in-out infinite; }
+.aurora-1 { animation: aurora-drift-1 9s ease-in-out infinite; }
+.aurora-2 { animation: aurora-drift-2 11s ease-in-out infinite; }
+.aurora-3 { animation: aurora-drift-3 10s ease-in-out infinite; }
 
 @media (prefers-reduced-motion: reduce) {
   .gradient-word,
