@@ -90,13 +90,23 @@
 }
 
 @layer components {
-  /* Gradient word used in headlines */
+  /* Gradient word used in headlines — slow shimmer effect */
   .gradient-word {
-    background: var(--gradient-word);
+    background: linear-gradient(
+      110deg,
+      hsl(var(--lav-1)) 0%,
+      hsl(var(--lav-2)) 25%,
+      hsl(var(--lav-4)) 45%,
+      hsl(var(--lav-1)) 60%,
+      hsl(var(--lav-3)) 80%,
+      hsl(var(--lav-2)) 100%
+    );
+    background-size: 250% 100%;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     display: inline-block;
+    animation: gradient-shimmer 7s ease-in-out infinite;
   }
 
   /* Cluely-style soft glass card.
