@@ -99,10 +99,40 @@
     display: inline-block;
   }
 
-  /* Soft rounded card shared across feature/path cards */
+  /* Cluely-style soft glass card.
+     - Outer ring (subtle dark) + inset highlight at the top for the "lit from above" feel
+     - Layered colored shadow that picks up the card tint
+     - Apply on top of any bg-lav-* utility */
   .project-card {
-    @apply rounded-3xl;
-    box-shadow: 0 10px 40px -15px hsl(220 100% 2% / 0.6);
+    @apply relative rounded-[28px];
+    box-shadow:
+      inset 0 1px 0 0 hsl(0 0% 100% / 0.55),
+      inset 0 0 0 1px hsl(0 0% 100% / 0.18),
+      0 1px 0 0 hsl(220 100% 8% / 0.08),
+      0 24px 48px -20px hsl(220 80% 30% / 0.45),
+      0 8px 24px -12px hsl(220 60% 20% / 0.35);
+  }
+
+  /* Top sheen overlay — adds the bright gradient highlight you see on Cluely cards */
+  .project-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      hsl(0 0% 100% / 0.35) 0%,
+      hsl(0 0% 100% / 0.05) 22%,
+      transparent 55%
+    );
+    mix-blend-mode: overlay;
+  }
+
+  /* Make sure card content sits above the sheen */
+  .project-card > * {
+    position: relative;
+    z-index: 1;
   }
 
   /* Initial hidden state for scroll-driven fade-up sections */
@@ -113,7 +143,26 @@
 }
 
 @layer utilities {
+  /* Dark glass — used for the floating nav (matches your night theme) */
   .glass {
-    @apply bg-white/5 backdrop-blur-xl border border-white/[0.12];
+    background: hsl(220 60% 10% / 0.55);
+    border: 1px solid hsl(0 0% 100% / 0.1);
+    box-shadow:
+      inset 0 1px 0 0 hsl(0 0% 100% / 0.08),
+      0 8px 32px hsl(220 100% 2% / 0.5);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  /* Inset glass panel — dark translucent block that sits inside light cards
+     (mirrors Cluely's prompt box at the bottom of their hero cards) */
+  .glass-inset {
+    background: hsl(220 50% 10% / 0.35);
+    border: 1px solid hsl(0 0% 100% / 0.14);
+    box-shadow:
+      inset 0 1px 0 0 hsl(0 0% 100% / 0.08),
+      0 4px 16px -8px hsl(220 100% 5% / 0.4);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
   }
 }
