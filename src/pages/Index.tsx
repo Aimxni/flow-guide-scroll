@@ -60,8 +60,13 @@ const Index = () => {
       <SiteNav />
 
       {/* ─── HERO ─── */}
-      <section className="relative flex flex-col items-center px-6 pb-16 pt-28 text-center md:pb-20 md:pt-32">
+      <motion.section
+        ref={heroRef}
+        style={{ opacity: heroOpacity, scale: heroScale }}
+        className="relative flex flex-col items-center px-6 pb-16 pt-28 text-center md:pb-20 md:pt-32"
+      >
         <motion.div
+          style={{ y: eyebrowY }}
           initial="hidden"
           animate="show"
           variants={fadeUp}
@@ -75,19 +80,23 @@ const Index = () => {
         </motion.div>
 
         <motion.h1
+          style={{ y: headlineY }}
           initial="hidden"
           animate="show"
           variants={fadeUp}
           custom={1}
           className="mb-6 font-display font-black leading-[0.93] tracking-[-0.04em]"
-          style={{ fontSize: "clamp(52px, 8.5vw, 128px)" }}
+          // eslint-disable-next-line react/forbid-dom-props
         >
-          Land your dream
-          <br />
-          <span className="gradient-word">job.</span>
+          <span style={{ fontSize: "clamp(52px, 8.5vw, 128px)" }} className="block">
+            Land your dream
+            <br />
+            <span className="gradient-word">job.</span>
+          </span>
         </motion.h1>
 
         <motion.p
+          style={{ y: subtitleY }}
           initial="hidden"
           animate="show"
           variants={fadeUp}
@@ -99,6 +108,7 @@ const Index = () => {
         </motion.p>
 
         <motion.div
+          style={{ y: ctaY }}
           initial="hidden"
           animate="show"
           variants={fadeUp}
@@ -115,6 +125,7 @@ const Index = () => {
         </motion.div>
 
         <motion.p
+          style={{ y: ctaY }}
           initial="hidden"
           animate="show"
           variants={fadeUp}
@@ -123,7 +134,7 @@ const Index = () => {
         >
           Trusted by students from BUET · DU · NSU · BRAC · IUT &amp; more
         </motion.p>
-      </section>
+      </motion.section>
 
       {/* ─── UNIVERSITY TICKER ─── */}
       <div className="border-t border-white/[0.07] py-5">
