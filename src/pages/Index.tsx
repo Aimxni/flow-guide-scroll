@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import {
   GraduationCap,
   Building2,
@@ -27,14 +28,34 @@ const fadeUp = {
 };
 
 const Index = () => {
+  const heroRef = useRef<HTMLElement>(null);
+
+  // Scroll-linked parallax: track hero leaving the top of the viewport
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  // Different layers move at different speeds for depth
+  const eyebrowY = useTransform(scrollYProgress, [0, 1], [0, -60]);
+  const headlineY = useTransform(scrollYProgress, [0, 1], [0, -120]);
+  const subtitleY = useTransform(scrollYProgress, [0, 1], [0, -90]);
+  const ctaY = useTransform(scrollYProgress, [0, 1], [0, -70]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.94]);
+  const bgY = useTransform(scrollYProgress, [0, 1], [0, 80]);
+
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
-      {/* Ambient background glow */}
-      <div className="pointer-events-none fixed inset-0 overflow-hidden">
-        <div className="absolute -top-40 left-1/4 h-[600px] w-[900px] rounded-full bg-gradient-glow-1 opacity-60 blur-[180px]" />
-        <div className="absolute right-[-150px] top-[55%] h-[600px] w-[600px] rounded-full bg-gradient-glow-2 opacity-50 blur-[150px]" />
-        <div className="absolute bottom-[-200px] left-[-100px] h-[500px] w-[500px] rounded-full bg-gradient-glow-1 opacity-40 blur-[160px]" />
-      </div>
+      {/* Ambient background glow — drifting auroras + scroll parallax */}
+      <motion.div
+        style={{ y: bgY }}
+        className="pointer-events-none fixed inset-0 overflow-hidden"
+      >
+        <div className="aurora-1 absolute -top-40 left-1/4 h-[600px] w-[900px] rounded-full bg-gradient-glow-1 opacity-60 blur-[180px]" />
+        <div className="aurora-2 absolute right-[-150px] top-[55%] h-[600px] w-[600px] rounded-full bg-gradient-glow-2 opacity-50 blur-[150px]" />
+        <div className="aurora-3 absolute bottom-[-200px] left-[-100px] h-[500px] w-[500px] rounded-full bg-gradient-glow-1 opacity-40 blur-[160px]" />
+      </motion.div>
 
       <SiteNav />
 
