@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import {
   GraduationCap,
   Building2,
@@ -27,20 +28,45 @@ const fadeUp = {
 };
 
 const Index = () => {
+  const heroRef = useRef<HTMLElement>(null);
+
+  // Scroll-linked parallax: track hero leaving the top of the viewport
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  // Different layers move at different speeds for depth
+  const eyebrowY = useTransform(scrollYProgress, [0, 1], [0, -60]);
+  const headlineY = useTransform(scrollYProgress, [0, 1], [0, -120]);
+  const subtitleY = useTransform(scrollYProgress, [0, 1], [0, -90]);
+  const ctaY = useTransform(scrollYProgress, [0, 1], [0, -70]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.94]);
+  const bgY = useTransform(scrollYProgress, [0, 1], [0, 80]);
+
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
-      {/* Ambient background glow */}
-      <div className="pointer-events-none fixed inset-0 overflow-hidden">
-        <div className="absolute -top-40 left-1/4 h-[600px] w-[900px] rounded-full bg-gradient-glow-1 opacity-60 blur-[180px]" />
-        <div className="absolute right-[-150px] top-[55%] h-[600px] w-[600px] rounded-full bg-gradient-glow-2 opacity-50 blur-[150px]" />
-        <div className="absolute bottom-[-200px] left-[-100px] h-[500px] w-[500px] rounded-full bg-gradient-glow-1 opacity-40 blur-[160px]" />
-      </div>
+      {/* Ambient background glow — drifting auroras + scroll parallax */}
+      <motion.div
+        style={{ y: bgY }}
+        className="pointer-events-none fixed inset-0 overflow-hidden"
+      >
+        <div className="aurora-1 absolute -top-40 left-1/4 h-[600px] w-[900px] rounded-full bg-gradient-glow-1 opacity-60 blur-[180px]" />
+        <div className="aurora-2 absolute right-[-150px] top-[55%] h-[600px] w-[600px] rounded-full bg-gradient-glow-2 opacity-50 blur-[150px]" />
+        <div className="aurora-3 absolute bottom-[-200px] left-[-100px] h-[500px] w-[500px] rounded-full bg-gradient-glow-1 opacity-40 blur-[160px]" />
+      </motion.div>
 
       <SiteNav />
 
       {/* ─── HERO ─── */}
-      <section className="relative flex flex-col items-center px-6 pb-16 pt-28 text-center md:pb-20 md:pt-32">
+      <motion.section
+        ref={heroRef}
+        style={{ opacity: heroOpacity, scale: heroScale }}
+        className="relative flex flex-col items-center px-6 pb-16 pt-28 text-center md:pb-20 md:pt-32"
+      >
         <motion.div
+          style={{ y: eyebrowY }}
           initial="hidden"
           animate="show"
           variants={fadeUp}
@@ -54,19 +80,23 @@ const Index = () => {
         </motion.div>
 
         <motion.h1
+          style={{ y: headlineY }}
           initial="hidden"
           animate="show"
           variants={fadeUp}
           custom={1}
           className="mb-6 font-display font-black leading-[0.93] tracking-[-0.04em]"
-          style={{ fontSize: "clamp(52px, 8.5vw, 128px)" }}
+          // eslint-disable-next-line react/forbid-dom-props
         >
-          Land your dream
-          <br />
-          <span className="gradient-word">job.</span>
+          <span style={{ fontSize: "clamp(52px, 8.5vw, 128px)" }} className="block">
+            Land your dream
+            <br />
+            <span className="gradient-word">job.</span>
+          </span>
         </motion.h1>
 
         <motion.p
+          style={{ y: subtitleY }}
           initial="hidden"
           animate="show"
           variants={fadeUp}
@@ -78,6 +108,7 @@ const Index = () => {
         </motion.p>
 
         <motion.div
+          style={{ y: ctaY }}
           initial="hidden"
           animate="show"
           variants={fadeUp}
@@ -94,6 +125,7 @@ const Index = () => {
         </motion.div>
 
         <motion.p
+          style={{ y: ctaY }}
           initial="hidden"
           animate="show"
           variants={fadeUp}
@@ -102,7 +134,7 @@ const Index = () => {
         >
           Trusted by students from BUET · DU · NSU · BRAC · IUT &amp; more
         </motion.p>
-      </section>
+      </motion.section>
 
       {/* ─── UNIVERSITY TICKER ─── */}
       <div className="border-t border-white/[0.07] py-5">

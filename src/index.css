@@ -90,13 +90,23 @@
 }
 
 @layer components {
-  /* Gradient word used in headlines */
+  /* Gradient word used in headlines — slow shimmer effect */
   .gradient-word {
-    background: var(--gradient-word);
+    background: linear-gradient(
+      110deg,
+      hsl(var(--lav-1)) 0%,
+      hsl(var(--lav-2)) 25%,
+      hsl(var(--lav-4)) 45%,
+      hsl(var(--lav-1)) 60%,
+      hsl(var(--lav-3)) 80%,
+      hsl(var(--lav-2)) 100%
+    );
+    background-size: 250% 100%;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     display: inline-block;
+    animation: gradient-shimmer 7s ease-in-out infinite;
   }
 
   /* Cluely-style soft glass card.
@@ -164,5 +174,41 @@
       0 4px 16px -8px hsl(220 100% 5% / 0.4);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
+  }
+}
+
+/* ─── Keyframes ─── */
+@keyframes gradient-shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes aurora-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(8%, -5%) scale(1.08); }
+  66% { transform: translate(-6%, 4%) scale(0.95); }
+}
+
+@keyframes aurora-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-7%, 6%) scale(1.12); }
+}
+
+@keyframes aurora-drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40% { transform: translate(5%, -7%) scale(1.06); }
+  80% { transform: translate(-4%, 5%) scale(0.97); }
+}
+
+.aurora-1 { animation: aurora-drift-1 22s ease-in-out infinite; }
+.aurora-2 { animation: aurora-drift-2 28s ease-in-out infinite; }
+.aurora-3 { animation: aurora-drift-3 25s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .gradient-word,
+  .aurora-1,
+  .aurora-2,
+  .aurora-3 {
+    animation: none;
   }
 }
