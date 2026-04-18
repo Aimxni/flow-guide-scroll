@@ -39,7 +39,7 @@ const Index = () => {
       <SiteNav />
 
       {/* ─── HERO ─── */}
-      <section className="relative flex flex-col items-center px-6 pb-28 pt-32 text-center">
+      <section className="relative flex flex-col items-center px-6 pb-16 pt-28 text-center md:pb-20 md:pt-32">
         <motion.div
           initial="hidden"
           animate="show"
