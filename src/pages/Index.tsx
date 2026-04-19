@@ -370,27 +370,28 @@ const Index = () => {
         </div>
       </ScrollReveal>
 
-      {/* ─── FOOTER ─── */}
-      <footer className="border-t border-white/[0.07] px-6 py-8 md:px-10">
+      {/* ─── FOOTER (sits on light tail of bridge) ─── */}
+      <footer className="border-t border-deep/10 px-6 py-8 md:px-10">
         <div className="mx-auto flex max-w-[1200px] flex-col items-center justify-between gap-5 md:flex-row">
           <div className="flex items-center gap-2.5">
             <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-lav-2">
               <Briefcase className="h-4 w-4 text-deep" />
             </div>
-            <span className="font-display text-sm font-bold text-foreground">InternHub</span>
+            <span className="font-display text-sm font-bold text-deep">InternHub</span>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-7 text-sm text-foreground/40">
+          <div className="flex flex-wrap justify-center gap-7 text-sm text-deep/60">
             {["About", "Contact", "Privacy Policy", "Terms of Service"].map((link) => (
-              <a key={link} href="#" className="transition-colors duration-200 hover:text-foreground/80">
+              <a key={link} href="#" className="transition-colors duration-200 hover:text-deep">
                 {link}
               </a>
             ))}
           </div>
 
-          <div className="text-sm text-foreground/30">© 2026 InternHub</div>
+          <div className="text-sm text-deep/40">© 2026 InternHub</div>
         </div>
       </footer>
+      </div>
     </div>
   );
 };
