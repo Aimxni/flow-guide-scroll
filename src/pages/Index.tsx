@@ -201,29 +201,37 @@ const Index = () => {
         </div>
       </ScrollReveal>
 
-      {/* ─── STATS ─── */}
-      <ScrollReveal className="border-t border-white/[0.07] px-6 py-20 md:px-10">
-        <div className="mx-auto grid max-w-[1200px] grid-cols-2 gap-8 text-center md:grid-cols-4 md:gap-4">
-          {[
-            { value: "10K+", label: "Active Listings" },
-            { value: "5K+", label: "Companies" },
-            { value: "50K+", label: "Students" },
-            { value: "95%", label: "Success Rate" },
-          ].map(({ value, label }) => (
-            <div key={label} className="flex flex-col items-center">
-              <div
-                className="font-display font-black leading-[0.9] tracking-[-0.05em] text-lav-1"
-                style={{ fontSize: "clamp(44px, 6vw, 80px)" }}
-              >
-                {value}
+      {/* ─── STATS (light palette break) ─── */}
+      <div
+        className="relative px-6 py-24 md:px-10"
+        style={{
+          background:
+            "linear-gradient(to bottom, hsl(var(--background)) 0%, hsl(210 40% 97%) 18%, hsl(210 40% 97%) 82%, hsl(var(--background)) 100%)",
+        }}
+      >
+        <ScrollReveal>
+          <div className="mx-auto grid max-w-[1200px] grid-cols-2 gap-8 text-center md:grid-cols-4 md:gap-4">
+            {[
+              { value: "10K+", label: "Active Listings" },
+              { value: "5K+", label: "Companies" },
+              { value: "50K+", label: "Students" },
+              { value: "95%", label: "Success Rate" },
+            ].map(({ value, label }) => (
+              <div key={label} className="flex flex-col items-center">
+                <div
+                  className="font-display font-black leading-[0.9] tracking-[-0.05em] text-deep"
+                  style={{ fontSize: "clamp(44px, 6vw, 80px)" }}
+                >
+                  {value}
+                </div>
+                <div className="mt-3 text-xs font-medium uppercase tracking-wide text-deep/55">
+                  {label}
+                </div>
               </div>
-              <div className="mt-3 text-xs font-medium uppercase tracking-wide text-foreground/45">
-                {label}
-              </div>
-            </div>
-          ))}
-        </div>
-      </ScrollReveal>
+            ))}
+          </div>
+        </ScrollReveal>
+      </div>
 
       {/* ─── CHOOSE YOUR PATH (pinned) ─── */}
       <ScrollReveal pinned className="border-t border-white/[0.07]">
@@ -329,9 +337,16 @@ const Index = () => {
         </div>
       </ScrollReveal>
 
-      {/* ─── CTA BANNER ─── */}
-      <ScrollReveal className="border-t border-white/[0.07] px-6 py-28 md:px-10">
-        <div id="cta" className="mx-auto max-w-[1200px] text-center">
+      {/* ─── CTA BANNER (bridge to light footer) ─── */}
+      <div
+        className="relative px-6 pb-0 pt-28 md:px-10"
+        style={{
+          background:
+            "linear-gradient(to bottom, hsl(var(--background)) 0%, hsl(var(--background)) 45%, hsl(210 40% 97%) 100%)",
+        }}
+      >
+        <ScrollReveal>
+        <div id="cta" className="mx-auto max-w-[1200px] pb-28 text-center">
           <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground/40">
             Ready when you are
           </p>
@@ -355,27 +370,28 @@ const Index = () => {
         </div>
       </ScrollReveal>
 
-      {/* ─── FOOTER ─── */}
-      <footer className="border-t border-white/[0.07] px-6 py-8 md:px-10">
+      {/* ─── FOOTER (sits on light tail of bridge) ─── */}
+      <footer className="border-t border-deep/10 px-6 py-8 md:px-10">
         <div className="mx-auto flex max-w-[1200px] flex-col items-center justify-between gap-5 md:flex-row">
           <div className="flex items-center gap-2.5">
             <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-lav-2">
               <Briefcase className="h-4 w-4 text-deep" />
             </div>
-            <span className="font-display text-sm font-bold text-foreground">InternHub</span>
+            <span className="font-display text-sm font-bold text-deep">InternHub</span>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-7 text-sm text-foreground/40">
+          <div className="flex flex-wrap justify-center gap-7 text-sm text-deep/60">
             {["About", "Contact", "Privacy Policy", "Terms of Service"].map((link) => (
-              <a key={link} href="#" className="transition-colors duration-200 hover:text-foreground/80">
+              <a key={link} href="#" className="transition-colors duration-200 hover:text-deep">
                 {link}
               </a>
             ))}
           </div>
 
-          <div className="text-sm text-foreground/30">© 2026 InternHub</div>
+          <div className="text-sm text-deep/40">© 2026 InternHub</div>
         </div>
       </footer>
+      </div>
     </div>
   );
 };
